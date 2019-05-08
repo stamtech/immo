@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "initdb": "mongorestore -d myFonciaBdd ./myFonciaBdd",
-    "populate": "node ./scripts/populate.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "test": "mocha ./src/tests --recursive",
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,12 @@
     "mongoose": "^5.5.6"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
+    "mocha": "^6.1.4",
     "nodemon": "^1.19.0"
   }
 }

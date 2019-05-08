@@ -13,10 +13,11 @@ const PORT = process.env.PORT || 8888;
 app.use(bodyParser.json());
 
 app.use('/login', login);
-app.use('/clients', client);
+app.use('/client', client);
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     res.status(err.status).send({ message: err.message });
+    return;
   }
   next();
 });
@@ -31,3 +32,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`app listening on ${PORT}`);
 });
+
+module.exports = app;
