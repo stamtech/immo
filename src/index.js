@@ -1,8 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const login = require('./routes/login');
 const client = require('./routes/client');
 
+mongoose.connect('mongodb://localhost:27017/myFonciaBdd', {
+  useNewUrlParser: true,
+});
 const app = express();
 const PORT = process.env.PORT || 8888;
 
@@ -10,6 +14,12 @@ app.use(bodyParser.json());
 
 app.use('/login', login);
 app.use('/clients', client);
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(err.status).send({ message: err.message });
+  }
+  next();
+});
 app.get('/status', (req, res) => {
   const localtime = new Date().toLocaleDateString();
   res.status(200).send(`your server time is ${localtime}`);

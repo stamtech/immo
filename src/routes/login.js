@@ -1,10 +1,8 @@
 const express = require('express');
 
 const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
 
 const router = express.Router();
-const jwtCheck = expressJwt({ secret: process.env.SECRET_KEY });
 const users = [
   {
     id: 1,
@@ -18,7 +16,7 @@ const users = [
   },
 ];
 
-router.post('/', jwtCheck, (req, res) => {
+router.post('/', (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
     res.status(400).send('you need a username and password');
@@ -26,7 +24,7 @@ router.post('/', jwtCheck, (req, res) => {
   }
   const userFound = users.find(user => user.userName === username || user.password === password);
   if (!userFound) {
-    req.status(401).send('User not found !');
+    res.status(401).send('User not found !');
     return;
   }
 
