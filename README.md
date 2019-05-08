@@ -15,7 +15,7 @@ or
 npm run install
 ```
 
-Start by initializing mongo database
+initialize mongo database
 ```
 npm run initdb
 ```
@@ -28,4 +28,10 @@ export SECRET_KEY = "my secret"
 Then start the api localy 
 ```
 npm run start
+```
+
+to test the api
+```
+npm run test
+
 ```
