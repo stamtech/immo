@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const login = require('./routes/login');
 const client = require('./routes/client');
+const Gestionnaire = require('./routes/gestionnaires');
 
 mongoose.connect('mongodb://localhost:27017/myFonciaBdd', {
   useNewUrlParser: true,
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/login', login);
 app.use('/client', client);
+app.use('/gestionnaire', Gestionnaire);
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     res.status(err.status).send({ message: err.message });
