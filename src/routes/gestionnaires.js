@@ -7,7 +7,7 @@ const jwtCheck = expressJwt({ secret: process.env.SECRET_KEY });
 const getAllGestionnaires = async () => Gestionnaire.find().lean();
 const isLeaf = node => node.l === null && node.r === null;
 
-let allCombinaisons = [];
+let allCombinaisons;
 const parcoursArbre = (combinaisons, node) => {
   if (node === null) return;
   if (isLeaf(node)) {
